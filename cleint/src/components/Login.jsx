@@ -4,6 +4,42 @@ import "./mix.css";
 
 const Login = () => {
     const [passShow, setpassShow] = useState(false);
+
+    const [inpval, setinpval] = useState({       
+        email: "",
+        password: "",
+    });
+    
+
+    const setVal = (e) => {
+        //console.log(e.target.value);
+        const {name, value} = e.target;
+        setinpval(() => {
+            return {
+                ...inpval,
+                [name]:value                             // this function setVal take the setInpVal function and return all the object inpVal name and value
+            }
+        })
+    };
+
+
+    const LoginUser = (e) => {
+        e.preventDefault(); 
+
+        const {email, password} = inpval;
+        if(email === ""){
+            alert("Please Enter Your Email");
+        }else if(!email.includes("@")){
+            alert(" Enter A Valid Email");
+        }else if(password === ""){
+            alert("Please Enter Your password");
+        }else if(password.length < 6){
+            alert("password must be 6 char");
+        }else{
+            console.log("Log In successful ");
+        }
+
+    }
     return (
         <>
             <section>
@@ -15,18 +51,18 @@ const Login = () => {
                     <form>
                         <div className="form_input">
                             <label htmlFor="email">Email</label>
-                            <input type="email" name="email" id="email" placeholder='Enter Your Email Address' />
+                            <input type="email" onChange={setVal} name="email" id="email" placeholder='Enter Your Email Address' />
                         </div>
                         <div className="form_input">
                             <label htmlFor="password">Password</label>
                             <div className="two">
-                                <input type={!passShow ? "password" : "text"} name="password" id="password" placeholder='Enter Your password' />
+                                <input type={!passShow ? "password" : "text"} onChange={setVal} name="password" id="password" placeholder='Enter Your password' />
                                 <div className="showpass" onClick={() => setpassShow(!passShow)} >
                                     {!passShow ? "Show" : "Hide"}                     
                                 </div>
                             </div>
                         </div>
-                        <button className='btn' >Login</button>
+                        <button className='btn' onClick={LoginUser} >Login</button>
                         <p>Don't have an Account? <NavLink to="/register">Sign Up</NavLink>  </p>
                     </form>
                     
