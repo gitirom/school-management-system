@@ -48,7 +48,9 @@ const Register = () => {
         }else if(password !== cpassword){
             alert("password and confirm password not match");
         }else{
-            console.log("User Registration successfully Done");
+            //console.log("User Registration successfully Done");
+
+            
         }
     
     }
