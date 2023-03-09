@@ -26,7 +26,7 @@ const Register = () => {
         })
     };
 
-    const addUserData = (e) => {
+    const addUserData = async(e) => {
         e.preventDefault();                                // for get no refresh the page when you hit the submit button
         
         const {name,email,password,cpassword} = inpval;    // destructing here
@@ -50,7 +50,22 @@ const Register = () => {
         }else{
             //console.log("User Registration successfully Done");
 
-            
+            const data = await fetch("http://localhost:8009/register", {       // connect react and nodejs app
+                method:"POST",
+                headers:{
+                    "Content-type":"application/json"
+                },
+                body:JSON.stringify({
+                    name, email, password, cpassword
+                })
+            });
+
+            const res = await data.json();
+            //console.log(res.status);
+            if(res.status == 201){
+                alert("user register done");
+                setinpval({...inpval,name:"",email:"",password:"",cpassword:""});
+            }
         }
     
     }

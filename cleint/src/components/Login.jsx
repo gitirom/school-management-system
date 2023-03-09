@@ -23,7 +23,7 @@ const Login = () => {
     };
 
 
-    const LoginUser = (e) => {
+    const LoginUser = async(e) => {
         e.preventDefault(); 
 
         const {email, password} = inpval;
@@ -36,7 +36,23 @@ const Login = () => {
         }else if(password.length < 6){
             alert("password must be 6 char");
         }else{
-            console.log("Log In successful ");
+            //console.log("Log In successful ");
+            const data = await fetch("http://localhost:8009/login", {       // connect react and nodejs app
+                method:"POST",
+                headers:{
+                    "Content-type":"application/json"
+                },
+                body:JSON.stringify({
+                    email, password
+                })
+            });
+
+            const res = await data.json();
+            console.log(res);
+            if(res.status == 201){
+                localStorage.setItem("usersdatatoken", res.result.token)    //setItem this method allows you to store values in the localStorage object.
+                setinpval({...inpval,email:"",password:""});
+            }
         }
 
     }
