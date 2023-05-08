@@ -1,12 +1,12 @@
 
-import React, {useState} from "react";
-import { NavLink } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./mix.css";
+import { toast } from "react-toastify";
 
 const Register = () => {
     const [passShow, setPassShow] = useState(false);
     const [cpassShow, setCPassShow] = useState(false);
-    
     
     const [inpval, setinpval] = useState({
         name: "",
@@ -14,8 +14,7 @@ const Register = () => {
         password: "",
         cpassword:""
     });
-
-    const setVal = (e) => {
+        const setVal = (e) => {
         //console.log(e.target.value);
         const {name, value} = e.target;
         setinpval(() => {
@@ -25,6 +24,19 @@ const Register = () => {
             }
         })
     };
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const userToken = localStorage.getItem("usersdatatoken")
+        if (userToken) {
+            navigate("/classes")
+        }
+    }, [navigate]);
+    
+
+
+
 
     const addUserData = async(e) => {
         e.preventDefault();                                // for get no refresh the page when you hit the submit button
@@ -62,8 +74,9 @@ const Register = () => {
 
             const res = await data.json();
             //console.log(res.status);
-            if(res.status == 201){
-                alert("user register done");
+            if(res.status === 201){
+                toast.success("User Registration success");
+                navigate("/");
                 setinpval({...inpval,name:"",email:"",password:"",cpassword:""});
             }
         }

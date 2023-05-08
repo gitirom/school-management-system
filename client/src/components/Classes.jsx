@@ -6,6 +6,7 @@ const Classes = () => {
         // store jwt token in local storage
 
         let token = localStorage.getItem("usersdatatoken");
+        // console.log(token);
 
         //pass token in Authorization header
         const res = await fetch("/validUser", {
@@ -17,7 +18,11 @@ const Classes = () => {
         });
 
         const data =  await res.json();
-        console.log(data);
+        if(data.status == 401 || !data){
+            console.log("error page redirect");
+        }else{
+            console.log("user verify");
+        }
     }
     
     useEffect(() => {

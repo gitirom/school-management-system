@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const keySecret = "romaezakmihyoasehujdlbhsihbqlfhjkoijs"
+const keySecret = "romaezakmihyoasehujdlbhsihbqlfhjkoijs";                    //you will never reveal that to the public or inject inside the JWT token.
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -58,11 +58,13 @@ userSchema.pre("save", async function(next){                             // pre(
 //token genrate
 userSchema.methods.generateAuthToken = async function(){
     try {
-        let token10 = jwt.sign({_id:this._id},keySecret , {
-            expiresIn:"1d"
+        let token10 = jwt.sign({_id:this._id},keySecret , {             // jwt.sign() create a JSON Web Token for that user and returns the token in the form of a JSON string.
+            expiresIn:"1d"                                               // The Expires HTTP header contains the date/time after which the response is considered expired.Invalid expiration dates with value 0 represent a date in the past and mean that the resource is already expired.
+
+            
         });
 
-        this.tokens = this.tokens.concat({token:token10});
+        this.tokens = this.tokens.concat({ token:token10 });
         await this.save();
         return token10;
     } catch (error) {

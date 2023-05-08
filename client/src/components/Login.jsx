@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
-import { NavLink } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 import "./mix.css";
 
 const Login = () => {
@@ -21,11 +22,19 @@ const Login = () => {
             }
         })
     };
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        const userToken = localStorage.getItem("usersdatatoken")
+        if (userToken) {
+            navigate("/classes")
+        }
+    }, [navigate]);
+    
+        
 
     const LoginUser = async(e) => {
         e.preventDefault(); 
-
         const {email, password} = inpval;
         if(email === ""){
             alert("Please Enter Your Email");
@@ -49,9 +58,12 @@ const Login = () => {
 
             const res = await data.json();
             console.log(res);
-            if(res.status == 201){
+            if(res.status === 201){
+                toast.success("User Login success");
                 localStorage.setItem("usersdatatoken", res.result.token)    //setItem this method allows you to store values in the localStorage object.
                 setinpval({...inpval,email:"",password:""});
+                navigate("/classes");
+
             }
         }
 
