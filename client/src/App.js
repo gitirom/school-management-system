@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Classes from "./components/Classes";
+import Error from "./components/Error";
 import {Routes, Route} from "react-router-dom";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,6 +19,7 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/classes" element={<Classes />} />
+      <Route path="*" element={<Error />} />
 
     </Routes>
     <ToastContainer                                                              

@@ -111,7 +111,7 @@ router.get("/validuser",authenticate,async(req,res)=>{
 //     } catch (error) {
 //         res.status(401).json({status:401,error})
 //     }
-// })
+// });
 
 
 

@@ -1,14 +1,14 @@
 import React from 'react';
 
+
 const Error = () => {
     return (
         <>
         <div className="container">
             <div style={{ minHeight: "85vh", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                <img src="/404.svg" alt="error" style={{ width: "500px", marginBottom: 20 }} />
-                {/* <h1 className="mb-3">404 ERROR </h1> */}
+                <img src="https://masbadar.com/wp-content/uploads/2022/12/8030430_3828537.jpg" alt="error" style={{ width: "500px", marginBottom: 20 }} />
                 <h2 className="mb-3">PAGE NOT FOUND</h2>
-                <NavLink to="/" className="btn btn-primary" style={{ fontSize: 18 }}> Back To Home Page </NavLink>
+                
             </div>
         </div>
     </>
