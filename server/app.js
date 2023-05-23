@@ -1,5 +1,5 @@
 const express = require("express");
-
+var path = require('path');
 const app = express();
 const router = require("./routes/router");
 const cors = require("cors");
@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
     res.status(201).json("server created")
 });
 
-// for user registration
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
 app.use(cors());

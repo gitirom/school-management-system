@@ -3,6 +3,8 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Classes from "./components/Classes";
+import AdminLogin from "./components/AdminLogin.jsx";
+import Admindash from "./components/AdminDash";
 import Error from "./components/Error";
 import {Routes, Route} from "react-router-dom";
 import {ToastContainer} from "react-toastify";
@@ -19,6 +21,8 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/classes" element={<Classes />} />
+      <Route path="/adminlogin" element={<AdminLogin />} />
+      <Route path="/admindash" element={<Admindash />} />
       <Route path="*" element={<Error />} />
 
     </Routes>

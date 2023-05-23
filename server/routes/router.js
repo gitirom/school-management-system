@@ -2,7 +2,9 @@ const express = require("express");
 const router = new express.Router();
 const userdb = require("../models/userSchema");
 var bcrypt = require("bcryptjs");
+const multer = require('multer');
 const authenticate = require("../middleware/authenticate");
+const { Add, FindAll, Delete } = require("../controllers/images.controllers");
 
 
 
@@ -113,6 +115,9 @@ router.get("/validuser",authenticate,async(req,res)=>{
 //     }
 // });
 
+router.post('/upload', Add)
+router.get('/upload', FindAll)
+router.delete('/upload/:id', Delete)
 
 
 
