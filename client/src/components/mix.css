@@ -118,3 +118,13 @@ form .btn:hover{
     color:#1a365d ;
     border-bottom: 2px solid #8694a8;
 }
+.trash{
+    color: red;
+    width: 20px;
+    cursor: pointer;
+    
+}
+.head{
+    display: flex;
+    justify-content: space-between;
+}
